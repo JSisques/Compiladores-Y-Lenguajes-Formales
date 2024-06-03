@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by Leo (Casa) -->
+<xs:schema xmlns="http://www.uem.es/compiladores" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.uem.es/compiladores" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="OrdenCompra">
+		<xs:annotation>
+			<xs:documentation>Describe el mensaje consistente en una orden de compra</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FechaPedido" type="xs:dateTime"/>
+				<xs:element name="NumeroOrden" type="xs:integer"/>
+				<xs:element name="Organizacion" type="OrganizacionType"/>
+				<xs:element name="Peticionario">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Nombre" type="xs:string"/>
+							<xs:element name="Apellidos" type="xs:string"/>
+							<xs:element name="Empleo" type="xs:string"/>
+							<xs:element name="Extensión">
+								<xs:simpleType>
+									<xs:restriction base="xs:integer">
+										<xs:maxInclusive value="999"/>
+										<xs:minInclusive value="111"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="e-mail" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="DireccionEnvio" type="DireccionEnvioType"/>
+				<xs:element name="DireccionFacturacion">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="NombreFactura"/>
+							<xs:element name="CalleFactura" type="xs:string" minOccurs="0"/>
+							<xs:element name="NúmeroFac" type="xs:integer"/>
+							<xs:element name="CiudadFac" type="xs:string"/>
+							<xs:element name="CP" type="xs:integer"/>
+							<xs:element name="Pais" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CosteTotal" type="xs:float"/>
+				<xs:element ref="Componentes"/>
+				<xs:element name="TamañoMensaje">
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+							<xs:maxInclusive value="4000"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Componentes" type="ComponentesType"/>
+	<xs:complexType name="OrganizacionType">
+		<xs:sequence>
+			<xs:element name="NombreOrg" type="xs:string"/>
+			<xs:element name="CodigoOrg" type="xs:integer"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ComponentesType">
+		<xs:sequence>
+			<xs:element name="NumeroComponentes" type="xs:integer"/>
+			<xs:element name="Componente" maxOccurs="100">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CodigoComp" type="xs:string"/>
+						<xs:element name="NombreProd" type="xs:string"/>
+						<xs:element name="Cantidad" type="xs:integer"/>
+						<xs:element name="PrecioUnidad" type="xs:float"/>
+						<xs:element name="PrecioComp" type="xs:double"/>
+						<xs:element name="TamañoComponente" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DireccionEnvioType">
+		<xs:sequence>
+			<xs:element name="NombrePeticionario" type="xs:string"/>
+			<xs:element name="CallePet" type="xs:string"/>
+			<xs:element name="NumPet" type="xs:integer"/>
+			<xs:element name="CiudadPet" type="xs:string"/>
+			<xs:element name="CP">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:maxInclusive value="50000"/>
+						<xs:minInclusive value="10000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Pais" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

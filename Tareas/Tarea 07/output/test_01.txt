@@ -1,0 +1,1 @@
+XML is valid according to the schema.
